@@ -29,3 +29,18 @@ function isAuthenticated(req, res, next) {
     if (req.user) return next(); //there is an authenticated user
     res.redirect('/users/signin'); //send them to the login page
 }
+
+// bycrpyt here
+// Require bcrypt
+const bcrypt = require('bcrypt');
+
+// Store the number of salt rounds
+const SALT_ROUNDS = bcrypt.genSaltSync(10);
+
+// Password
+const password = 'abc1234d';
+
+// how we hash our password
+const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
+
+console.log(hashedPassword)
