@@ -17,7 +17,7 @@ module.exports = {
 };
 
 function newUser(req, res) {
-    res.render('/users/new');
+    res.render('users/new');
 };
 
 function signUp(req, res) {
@@ -35,7 +35,7 @@ function signUp(req, res) {
 };
 
 function signIn(req, res) {
-    res.render('/users/signin');
+    res.render('users/signin');
 };
 
 function signOut(req, res) {
@@ -50,7 +50,7 @@ function signOut(req, res) {
 
 function login(req, res) {
     // fin the user in data base - we need to seeif they exsist
-    user.findOne({username: req.body.username}, function(err, foundUser) {
+    User.findOne({username: req.body.username}, function(err, foundUser) {
         if(foundUser === null){
             // if they don't exsist - redirect back to login
             res.redirect('/users/signin');
@@ -73,5 +73,5 @@ function login(req, res) {
 };
 
 function profile(req, res) {
-    res.render('/users/profile');
+    res.render('users/profile');
 };
