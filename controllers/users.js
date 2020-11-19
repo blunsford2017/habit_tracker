@@ -17,7 +17,7 @@ module.exports = {
 };
 
 function newUser(req, res) {
-    res.render('/new');
+    res.render('/users/new');
 };
 
 function signUp(req, res) {
@@ -35,7 +35,7 @@ function signUp(req, res) {
 };
 
 function signIn(req, res) {
-    res.render('/login');
+    res.render('/users/signin');
 };
 
 function signOut(req, res) {
@@ -53,7 +53,7 @@ function login(req, res) {
     user.findOne({username: req.body.username}, function(err, foundUser) {
         if(foundUser === null){
             // if they don't exsist - redirect back to login
-            res.redirect('/signin');
+            res.redirect('/users/signin');
         } else {
             // if they do exsist - compare the password, is it a match?
             const isMatched = bcrypt.compareSync(req.body.password, foundUser.password);
@@ -62,10 +62,10 @@ function login(req, res) {
                 //      add the user to a new session
                 req.session.userId = foundUser._id;
                 //      redirect to a secure location
-                res.redirect('/profile');
+                res.redirect('/users/profile');
             } else {
                 // if the password is wrong - redirect back to login
-                res.redirect('/signin');
+                res.redirect('/users/signin');
             }
         }
     })
@@ -73,5 +73,5 @@ function login(req, res) {
 };
 
 function profile(req, res) {
-    res.render('/profile');
+    res.render('/users/profile');
 };
