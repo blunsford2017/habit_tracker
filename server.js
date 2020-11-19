@@ -1,7 +1,7 @@
 // Require modules
 const express = require('express');
 const morgan = require('morgan');
-const port = 3000;
+const port = process.env.PORT || 3000;
 const indexRouter = require('./routes/index');
 const session = require('express-session');
 const userRouter = require('./routes/users');
@@ -9,6 +9,8 @@ const authoriztion = require('./utils/authorization');
 
 // Set up express app
 const app = express();
+// config env
+require('dotenv').config();
 
 // connect to DB
 require('./config/database');
@@ -22,7 +24,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
 app.use(session({
-    secret: 'supersecret',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }));
