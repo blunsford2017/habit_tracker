@@ -38,9 +38,7 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = bcrypt.genSaltSync(10);
 
 // Password
-const password = 'abc1234d';
+const password = process.env.PASSWORD;
 
 // how we hash our password
 const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
-
-console.log(hashedPassword)
