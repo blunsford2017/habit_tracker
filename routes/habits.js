@@ -6,6 +6,7 @@ const router = express.Router();
 
 // require habit controller
 const habitCtrl = require('../controllers/habits');
+const habit = require('../models/habit');
 
 // define route new habit
 router.get('/new', habitCtrl.new);
@@ -13,7 +14,10 @@ router.get('/new', habitCtrl.new);
 router.post('/index', habitCtrl.create);
 // define route to see list
 router.get('/index', habitCtrl.index);
-
+// WORKING: define route to update
+router.put('/index/id:', habitCtrl.update)
+// TODO: define route to delete
+// router.delete('habits/:id/delete', habitCtrl.delete)
 
 // export router object
 module.exports = router;
