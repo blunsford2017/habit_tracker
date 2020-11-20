@@ -30,7 +30,7 @@ function signUp(req, res) {
     User.create(req.body, function(err, newUser) {
         // redirectback to the home route
         console.log(newUser);
-        res.redirect('/');
+        res.redirect('/profile');
     });
 };
 

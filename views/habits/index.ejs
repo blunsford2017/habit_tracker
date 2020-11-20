@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Project 2</title>
+</head>
+<body>
+    <h1>Here are your habits!</h1>
+    <!-- signout -->
+    <a href="/users/logout">Logout and have a great day!</a>
+<!-- habits -->
+    <!-- new -->
+    <a href="/habits/new">Create a new habit!</a>
+    <!-- exsisting -->
+    <ul>
+        <% habits.forEach(function(habit) { %>
+            <li>
+                Habit: <%= habit.habit %>
+                - 
+                Month: <%= habit.month %> 
+                - 
+                Day Of Week: <%= habit.dayName %> 
+                - 
+                Day: <%= habit.dayNo %> 
+                - 
+                Note: <%= habit.note %> 
+            </li>
+        <% });%>
+    </ul>
+
+</body>
+</html>
