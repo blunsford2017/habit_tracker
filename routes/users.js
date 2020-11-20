@@ -10,7 +10,7 @@ router.post('/signup', userCtrl.signUp);
 
 router.get('/signin', userCtrl.signIn);
 
-router.get('/signout', userCtrl.signOut);
+router.get('/signin', userCtrl.signOut);
 
 router.post('/login', userCtrl.login);
 

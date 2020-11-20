@@ -44,7 +44,7 @@ function signOut(req, res) {
         // delete req.user
         delete req.user;
         // redirect home
-        res.redirect('/');
+        res.redirect('users/signin');
     });
 };
 

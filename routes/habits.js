@@ -12,7 +12,7 @@ router.get('/new', habitCtrl.new);
 // define route for create
 router.post('/index', habitCtrl.create);
 // define route to see list
-router.get('/', habitCtrl.index);
+router.get('/index', habitCtrl.index);
 
 
 // export router object
