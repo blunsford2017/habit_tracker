@@ -17,8 +17,6 @@
 
     <!-- exsisting -->
     <ul>
-    
-        <% habits.forEach(function(habit) { %>
                 <li>
                     Habit: <%= habit.habit %>
                     - 
@@ -30,18 +28,14 @@
                     - 
                     Note: <%= habit.note %> 
                 </li>
-                <li>
-                    <form action="/habits/<%= habit._id %>?_method=PUT" method="POST">
-                        <!-- Value attribute is being set to the habit's current text -->
-                        <input name="text" value="<%= habit.habit %>">
-                        <button type="submit">Update!</button>
-                      </form>
-                </li>
-                <li>
-                    <form action="/habits/<%= habit._id %>?_method=DELETE" method="POST">
-                        <button type="submit">Delete!</button>
-                      </form>
-                </li>
+
+            
+    <!-- TODO: delete habit -->
+            <li>
+                <!-- <form action="/habits/index<%= habit._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete Habit</button>
+                </form> -->
+            </li>
         <% });%>
     </ul>
 

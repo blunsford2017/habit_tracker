@@ -6,7 +6,8 @@ module.exports = {
     new:newHabit,
     create,
     index,
-    update,
+    edit,
+    delete: deletehabit,
 };
 
 // define new action
@@ -35,23 +36,30 @@ function index(req, res) {
     });
 };
 
-// WORKING: update a habit
-function update(req, res) {
+// update a habit
+function edit(req, res) {
+    Habit.findById(req.params.id, function(err, habit) {
+      // Verify habit is "owned" by logged in user
+      if (!habit.user.equals(req.user._id)) return res.redirect('/habits');
+      res.render('habits/edit', {habit});
+    });
+  }
+
+// Delete habit
+function deletehabit(req, res) {
     // Note the cool "dot" syntax to query on the property of a subdoc
-    Habit.findOne({'habits._id': req.params.id}, function(err, habit) {
-      // Find the comment subdoc using the id method on Mongoose arrays
+    Habit.findOne({'habits._id': req.params.id}, function(err, habits) {
+      // Find the habit subdoc using the id method on Mongoose arrays
       // https://mongoosejs.com/docs/subdocs.html
-      const habitSubdoc = habit.habits.id(req.params.id);
+      const habitSubdoc = habits.habits.id(req.params.id);
       // Ensure that the habit was created by the logged in user
-      if (!habitSubdoc.userId.equals(req.user._id)) return res.redirect(`/habits/index${habit._id}`);
-      // Update the text of the comment
-      habitSubdoc.text = req.body.text;
-      // Save the updated habit
-      habit.save(function(err) {
-        // Redirect back to the habit's show view
-        res.redirect(`/habits/index`);
+      if (!habitSubdoc.userId.equals(req.user._id)) return res.redirect(`/habits/${habits._id}`);
+      // Remove the habit using the remove method of the subdoc
+      habitSubdoc.remove();
+      // Save the updated habits
+      habits.save(function(err) {
+        // Redirect back to the habits's show view
+        res.redirect(`/habits/${habits._id}`);
       });
     });
-  };
-
-//   TODO: Delete habit
+  }
