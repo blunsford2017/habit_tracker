@@ -31,11 +31,9 @@
                     Note: <%= habit.note %> 
                 </li>
                 <li>
-                    <form action="/habits/<%= habit._id %>?_method=PUT" method="POST">
-                        <!-- Value attribute is being set to the habit's current text -->
-                        <input name="text" value="<%= habit.habit %>">
-                        <button type="submit">Update!</button>
-                      </form>
+                    <a action="/habits/<%= habit._id %>/edit" >
+                        Edit
+                    </a>
                 </li>
                 <li>
                     <form action="/habits/<%= habit._id %>?_method=DELETE" method="POST">
