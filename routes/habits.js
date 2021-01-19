@@ -14,12 +14,11 @@ router.get('/new', habitCtrl.new);
 router.post('/index', habitCtrl.create);
 // define route to see list
 router.get('/index', habitCtrl.index);
-
 //define route to update
-router.get('/:id/edit', habitCtrl.edit)
-// router.put('/:id', habitCtrl.update)
+router.get('/:id/edit', habitCtrl.edit);
+router.put('/:id', habitCtrl.update)
 //define route to delete
-router.delete('habits/:id/delete', habitCtrl.delete)
+router.delete('/:id', habitCtrl.delete);
 
 // export router object
 module.exports = router;
