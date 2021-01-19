@@ -7,7 +7,8 @@ module.exports = {
     create,
     index,
     edit,
-    delete: deletehabit,
+    update,
+    delete: deleteHabit,
 };
 
 // define new action
@@ -43,23 +44,29 @@ function edit(req, res) {
       if (!habit.user.equals(req.user._id)) return res.redirect('/habits');
       res.render('habits/edit', {habit});
     });
-  }
+}
+
+function update (req, res) {
+  Habit.findByIdAndUpdate(req.params.id, req.body, function(err, habit){
+    res.redirect('habits/index')
+  } )
+}
 
 // Delete habit
-function deletehabit(req, res) {
+function deleteHabit(req, res) {
     // Note the cool "dot" syntax to query on the property of a subdoc
-    Habit.findOne({'habits._id': req.params.id}, function(err, habits) {
+    Habit.findByIdAndDelete(req.params.id, function(err, habit) {
       // Find the habit subdoc using the id method on Mongoose arrays
       // https://mongoosejs.com/docs/subdocs.html
       const habitSubdoc = habits.habits.id(req.params.id);
       // Ensure that the habit was created by the logged in user
       if (!habitSubdoc.userId.equals(req.user._id)) return res.redirect(`/habits/${habits._id}`);
       // Remove the habit using the remove method of the subdoc
-      habitSubdoc.remove();
+      // habitSubdoc.remove();
       // Save the updated habits
       habits.save(function(err) {
         // Redirect back to the habits's show view
-        res.redirect(`/habits/${habits._id}`);
+        res.redirect(`/habits`);
       });
     });
   }
