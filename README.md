@@ -26,6 +26,8 @@
 - Morgan
 - Dotenv
 - EJS
+- Trello
+- Heroku
 
 ## Getting Started
 [Click Here](https://your-habit-tracker.herokuapp.com/) to see the application!
